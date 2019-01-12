@@ -1,0 +1,3 @@
+include webapp/templates/index.html
+include webapp/static/script.js
+include webapp/static/style.css
