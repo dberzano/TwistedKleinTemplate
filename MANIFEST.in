@@ -1,3 +1,3 @@
-include webapp/templates/index.html
+include webapp/templates/index.html.j2
 include webapp/static/script.js
 include webapp/static/style.css
