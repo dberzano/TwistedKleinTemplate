@@ -33,6 +33,8 @@ from klein import Klein
 from jinja2 import Environment, PackageLoader
 from twisted.web.static import File
 
+from .utils import get_form
+
 APP = Klein()
 
 # Initialize the Jinja2 template engine
@@ -54,22 +56,6 @@ def static(req):  # pylint: disable=unused-argument
     """
     staticPrefix = resource_filename(__name__, "static")
     return File(staticPrefix)
-
-def get_form(req, label, var_type=str, get_list=False):  # pylint: disable=unused-argument
-    """Get elements from a form in an intuitive way. `label` is a string. If `type` is not specified
-    the value of the first element from the form list is returned (use `type=list` to return the
-    whole list). If `type` is `bool` then some smart comparison on strings meaning `True` is
-    performed.
-    """
-    if isinstance(label, str):
-        label = label.encode()  # to bytes
-    val = []
-    for i in req.args.get(label, [b"off"]) if var_type == bool else req.args[label]:
-        i = i.decode("utf-8")  # to string
-        if var_type == bool:
-            i = i.lower() in ["on", "true", "yes", "1"]
-        val.append(i)
-    return val if get_list else val[0]
 
 def main():
     """Entry point. Executes the web application by reading some configuration bits from the
