@@ -40,19 +40,23 @@ import binascii
 import os.path
 import json
 import time
+from random import randint
 from platform import python_version
 from pkg_resources import resource_filename
 
 from klein import Klein
 from jinja2 import Environment, PackageLoader
+from twisted.python import log
 from twisted.web.static import File
 from twisted.internet.defer import inlineCallbacks, returnValue
 from twisted.internet.task import deferLater
+from twisted.internet.threads import deferToThread
 from twisted.internet import reactor
 
 from .utils import get_form
 
 APP = Klein()
+JOBS = {}
 
 # Initialize the Jinja2 template engine
 J2 = Environment(loader=PackageLoader(__name__, "templates"))
@@ -64,6 +68,13 @@ def async_sleep(sleep_sec: int):
     """Sleep asynchronously. Returns a Deferred.
     """
     return deferLater(reactor, sleep_sec, lambda *x, **y: None)
+
+def long_running_job(job_id):
+    """This is a long-running job that should run in a thread.
+    """
+    log.msg(f"long_running_job(): job {job_id} started")
+    time.sleep(10)
+    log.msg(f"long_running_job(): job {job_id} finished")
 
 @APP.route("/")
 def root(req):  # pylint: disable=unused-argument
@@ -93,6 +104,42 @@ async def async_new(req):
     await async_sleep(waitSec)
     req.setHeader("Content-Type", "application/json")
     return json.dumps({"status": "ok", "waitRequested": waitSec, "waitedFor": time.time()-t0})
+
+@APP.route("/start-job")
+def start_job(req):
+    """A long-running process requiring a separate thread for running. This call returns a JSON
+    containing an ID that will be used to query whether the processing has finished.
+    """
+    jobId = 0
+    while jobId == 0 or jobId in JOBS:
+        jobId = randint(1, 1000)
+    log.msg(f"start_job(): created new job with id {jobId}")
+    JOBS[jobId] = {"running": True, "finished": False}  # job is queued
+
+    def job_finished(job_return, job_id):
+        log.msg(f"job_finished(): job {job_id} returned {job_return}")
+        JOBS[job_id]["running"] = False
+        JOBS[job_id]["finished"] = True
+
+    d = deferToThread(long_running_job, jobId)
+    d.addCallback(job_finished, jobId)
+
+    req.setHeader("Content-Type", "application/json")
+    return json.dumps({"jobId": jobId})
+
+@APP.route("/query-job")
+def query_job(req):
+    """Get status of all jobs, or a single one if `jobId` parameter is given.
+    """
+    req.setHeader("Content-Type", "application/json")
+    try:
+        jobId = int(get_form(req, "jobId"))
+    except (KeyError,ValueError):
+        jobId = 0
+    log.msg(f"Requested status of job {jobId}")
+    if jobId == 0:
+        return json.dumps(JOBS)  # beware, keys are converted to strings (hashable)
+    return json.dumps({jobId: JOBS.get(jobId, {})})
 
 @APP.route("/static/", branch=True)
 def static(req):  # pylint: disable=unused-argument
