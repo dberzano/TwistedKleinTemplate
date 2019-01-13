@@ -53,7 +53,7 @@ from twisted.internet.task import deferLater
 from twisted.internet.threads import deferToThread
 from twisted.internet import reactor
 
-from .utils import get_form
+from .utils import get_form, no_cache
 
 APP = Klein()
 JOBS = {}
@@ -132,6 +132,7 @@ def query_job(req):
     """Get status of all jobs, or a single one if `jobId` parameter is given.
     """
     req.setHeader("Content-Type", "application/json")
+    no_cache(req)
     try:
         jobId = int(get_form(req, "jobId"))
     except (KeyError,ValueError):

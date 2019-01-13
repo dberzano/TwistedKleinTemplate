@@ -7,10 +7,18 @@
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
   <script src="/static/script.js"></script>
   <h1>{{ title }}</h1>
   <p>Example home page for a Twisted Klein web application by <a href="https://github.com/dberzano">Dario Berzano</a>.</p>
-  <p>Information:</p>
+
+  <h3>Jobs</h3>
+  <ul id="jobStatus">
+    <!-- Filled by jQuery -->
+  </ul>
+  <p><a href="#" id="startJob">Start job</a></p>
+
+  <h3>Information</h3>
   <ul>
     <li>Python {{ pyver }}</li>
   </ul>

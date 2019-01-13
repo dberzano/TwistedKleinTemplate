@@ -30,3 +30,10 @@ def get_form(req, label, var_type=str, get_list=False):
             i = i.lower() in ["on", "true", "yes", "1"]
         val.append(i)
     return val if get_list else val[0]
+
+def no_cache(req):
+    headers = { "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0" };
+    for k,v in headers.items():
+        req.setHeader(k, v)
