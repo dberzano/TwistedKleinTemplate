@@ -135,7 +135,7 @@ def query_job(req):
     no_cache(req)
     try:
         jobId = int(get_form(req, "jobId"))
-    except (KeyError,ValueError):
+    except (KeyError, ValueError):
         jobId = 0
     log.msg(f"Requested status of job {jobId}")
     if jobId == 0:

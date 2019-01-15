@@ -32,8 +32,10 @@ def get_form(req, label, var_type=str, get_list=False):
     return val if get_list else val[0]
 
 def no_cache(req):
-    headers = { "Cache-Control": "no-cache, no-store, must-revalidate",
-                "Pragma": "no-cache",
-                "Expires": "0" };
-    for k,v in headers.items():
+    """Sets headers to prevent this resource from being cached by the client.
+    """
+    headers = {"Cache-Control": "no-cache, no-store, must-revalidate",
+               "Pragma": "no-cache",
+               "Expires": "0"}
+    for k, v in headers.items():
         req.setHeader(k, v)

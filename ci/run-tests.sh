@@ -1,18 +1,18 @@
 #!/bin/bash -e
 
-#############################################################################
-##  © Copyright CERN 2018. All rights not expressly granted are reserved.  ##
-##                 Author: Gian.Michele.Innocenti@cern.ch                  ##
-## This program is free software: you can redistribute it and/or modify it ##
-##  under the terms of the GNU General Public License as published by the  ##
-## Free Software Foundation, either version 3 of the License, or (at your  ##
-## option) any later version. This program is distributed in the hope that ##
-##  it will be useful, but WITHOUT ANY WARRANTY; without even the implied  ##
-##     warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.    ##
-##           See the GNU General Public License for more details.          ##
-##    You should have received a copy of the GNU General Public License    ##
-##   along with this program. if not, see <https://www.gnu.org/licenses/>. ##
-#############################################################################
+# This file is part of Twisted Klein webapp template.
+# Author: Dario Berzano <dario.berzano@gmail.com>
+#
+# Twisted Klein webapp template is free software: you can redistribute it and/or modify it under the
+# terms of the GNU General Public License as published by the Free Software Foundation, either
+# version 3 of the License, or (at your option) any later version.
+#
+# Twisted Klein webapp template is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with Twisted Klein webapp
+# template. If not, see <http://www.gnu.org/licenses/>.
 
 cd "$(dirname "$0")"/..
 
@@ -59,10 +59,10 @@ EOF
 
 if [[ $TRAVIS_PULL_REQUEST != "false" && $TRAVIS_COMMIT_RANGE ]]; then
   # Only check changed Python files (snappier)
-  CHANGED_FILES=($(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -E '\.py$' | grep -vE '^setup\.py$' || true))
+  CHANGED_FILES=($(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -E '\.py$' || true))
 else
   # Check all Python files
-  CHANGED_FILES=($(find . -name '*.py' -a -not -name setup.py))
+  CHANGED_FILES=($(find . -name '*.py'))
 fi
 
 ERRCHECK=
