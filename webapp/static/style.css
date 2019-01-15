@@ -1,43 +1,4 @@
-/* This is your own style */
-
-/* Palette: https://coolors.co/8ea604-f5bb00-ec9f05-d76a03-bf3100 */
-
-/* Foreground */
-.fg-green      { color: rgb(142, 166, 4); }
-.fg-yellow     { color: rgb(245, 187, 0); }
-.fg-orange     { color: rgb(236, 159, 5); }
-.fg-darkorange { color: rgb(215, 106, 3); }
-.fg-red        { color: rgb(191,  49, 0); }
-
-/* Background */
-.bg-green      { background-color: rgb(142, 166, 4); }
-.bg-yellow     { background-color: rgb(245, 187, 0); }
-.bg-orange     { background-color: rgb(236, 159, 5); }
-.bg-darkorange { background-color: rgb(215, 106, 3); }
-.bg-red        { background-color: rgb(191,  49, 0); }
-
-body {
-  margin: 1em;
-  font-family: helvetica;
-  background-color: rgb(142, 166, 4, 0.3); /* green */
-  color: rgb(1, 1, 1, 0.6);
-}
-
-h1 {
-  color: rgb(191,  49, 0, 0.7);
-}
-
-hr {
-  border: 0;
-  height: 1px;
-  background-color: rgb(191,  49, 0, 0.7);
-}
-
-a {
-  text-decoration: none;
-  color: rgb(191,  49, 0, 0.7);
-}
-
-a:hover {
-  text-decoration: underline;
+#my-body {
+  position: relative;
+  top: 60px;
 }

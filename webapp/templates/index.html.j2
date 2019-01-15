@@ -1,28 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Material Design for Bootstrap fonts and icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+  <!-- Material Design for Bootstrap CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+
+  <!-- Font Awesome - https://fontawesome.com -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
   <link rel="stylesheet" href="/static/style.css">
+  <title>{{ title }}</title>
+
 </head>
 <body>
+
+  <!-- jQuery and Bootstrap Material Design: https://fezvrasta.github.io/bootstrap-material-design/ -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+
+  <!-- Our custom script must call bootstrapMaterialDesign() -->
   <script src="/static/script.js"></script>
-  <h1>{{ title }}</h1>
-  <p>Example home page for a Twisted Klein web application by <a href="https://github.com/dberzano">Dario Berzano</a>.</p>
 
-  <h3>Jobs</h3>
-  <ul id="jobStatus">
-    <!-- Filled by jQuery -->
-  </ul>
-  <p><a href="#" id="startJob">Start job</a></p>
+  <!-- Header - https://mdbootstrap.com/docs/jquery/navigation/navbar/#fixed-top -->
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color fixed-top bg-info">
 
-  <h3>Information</h3>
-  <ul>
-    <li>Python {{ pyver }}</li>
-  </ul>
-  <hr/>
-  <p><i>This template is released under the GPLv3 license, see the <tt>LICENSE</tt> file on the root directory of this repository.</i></p>
+    <!-- The title -->
+    <a class="navbar-brand" href="#">Twisted/Klein webapp example</a>
+
+    <!-- Operations -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"><i class="fas fa-running"></i> Jobs</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" id="jobStart" href="#"><i class="fas fa-plus-circle"></i> New job</a>
+      </li>
+    </ul>
+
+    <!-- Info -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/dberzano/TwistedKleinTemplate"><i class="fab fa-github"></i> Source</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/dberzano"><i class="fas fa-user-astronaut"></i> Author</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-info-circle"></i> Info
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+          <a class="dropdown-item" href="#">Name: {{ title }}</a>
+          <a class="dropdown-item" href="#">Python version: {{ pyver }}</a>
+        </div>
+      </li>
+    </ul>
+
+  </nav>
+
+  <!-- Body -->
+  <div class="container-fluid" id="my-body">
+    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+      <li class="nav-item active">
+        <a class="nav-link" id="results1-tab" data-toggle="tab" href="#results1" role="tab" aria-controls="results1" aria-selected="false">Results 1</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="results2-tab" data-toggle="tab" href="#results2" role="tab" aria-controls="results2" aria-selected="false">Results 2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="results3-tab" data-toggle="tab" href="#results3" role="tab" aria-controls="results3" aria-selected="false">Results 3</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="results4-tab" data-toggle="tab" href="#results4" role="tab" aria-controls="results4" aria-selected="false">Results 4</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="results5-tab" data-toggle="tab" href="#results5" role="tab" aria-controls="results5" aria-selected="false">Results 5</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="results6-tab" data-toggle="tab" href="#results6" role="tab" aria-controls="results6" aria-selected="false">Results 6</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="results1" role="tabpanel" aria-labelledby="results1-tab">
+
+        <!-- Jobs status -->
+        <div class="list-group list-group-info" id="jobStatus">
+          <!-- This is a template. The first one is for running jobs, the second for queued, the third for finished -->
+          <a href="#" class="list-group-item list-group-item-action">JOBNAME&nbsp;<span class="badge badge-info">running</span></a>
+          <a href="#" class="list-group-item list-group-item-action">JOBNAME&nbsp;<span class="badge badge-warning">queued</span></a>
+          <a href="#" class="list-group-item list-group-item-action">JOBNAME&nbsp;<span class="badge badge-success">finished</span></a>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="results2" role="tabpanel" aria-labelledby="results2-tab">Results 2</div>
+      <div class="tab-pane fade" id="results3" role="tabpanel" aria-labelledby="results3-tab">Results 3</div>
+      <div class="tab-pane fade" id="results4" role="tabpanel" aria-labelledby="results4-tab">Results 4</div>
+      <div class="tab-pane fade" id="results5" role="tabpanel" aria-labelledby="results5-tab">Results 5</div>
+      <div class="tab-pane fade" id="results6" role="tabpanel" aria-labelledby="results6-tab">Results 6</div>
+    </div>
+  </div>
+
 </body>
 </html>
