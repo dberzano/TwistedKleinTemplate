@@ -27,3 +27,8 @@
 #my-navbar li.nav-item.dropdown {
   cursor: pointer;  /* for some reason it isn't so... */
 }
+
+/* Tweaking bootstrap tables */
+table.table td, table.table th {
+  vertical-align: middle;
+}

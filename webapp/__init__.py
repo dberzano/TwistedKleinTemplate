@@ -114,12 +114,17 @@ def start_job(req):
     while jobId == 0 or jobId in JOBS:
         jobId = randint(1, 1000)
     log.msg(f"start_job(): created new job with id {jobId}")
-    JOBS[jobId] = {"running": True, "finished": False}  # job is queued
+    JOBS[jobId] = {"running": True,
+                   "finished": False,
+                   "tqueued": int(time.time()),
+                   "tstarted": int(time.time()),
+                   "tfinished": None}
 
     def job_finished(job_return, job_id):
         log.msg(f"job_finished(): job {job_id} returned {job_return}")
-        JOBS[job_id]["running"] = False
-        JOBS[job_id]["finished"] = True
+        JOBS[jobId].update({"running": False,
+                            "finished": True,
+                            "tfinished": int(time.time())})
 
     d = deferToThread(long_running_job, jobId)
     d.addCallback(job_finished, jobId)
