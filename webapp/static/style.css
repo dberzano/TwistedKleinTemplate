@@ -1,4 +1,29 @@
 #my-body {
   position: relative;
-  top: 60px;
+  top: 70px;
+}
+
+/* Navigation bar: purple background, yellow hover on buttons */
+#my-navbar {
+  background-color: #3f51b5;
+}
+
+#my-navbar li.nav-item {
+  border-radius: 4px;
+}
+
+#my-navbar li.nav-item > a {
+  color: #cdbfe3;
+}
+
+#my-navbar li.nav-item:hover > a {
+  color: #2a2730;
+}
+
+#my-navbar li.nav-item:hover {
+  background-color: #ffe484;
+}
+
+#my-navbar li.nav-item.dropdown {
+  cursor: pointer;  /* for some reason it isn't so... */
 }

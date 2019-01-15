@@ -30,10 +30,10 @@
   <script src="/static/script.js"></script>
 
   <!-- Header - https://mdbootstrap.com/docs/jquery/navigation/navbar/#fixed-top -->
-  <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color fixed-top bg-info">
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color fixed-top" id="my-navbar">
 
     <!-- The title -->
-    <a class="navbar-brand" href="#">Twisted/Klein webapp example</a>
+    <a class="navbar-brand" href="/">Twisted/Klein webapp</a>
 
     <!-- Operations -->
     <ul class="navbar-nav mr-auto">
@@ -68,7 +68,7 @@
 
   <!-- Body -->
   <div class="container-fluid" id="my-body">
-    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+    <ul class="nav nav-tabs nav-fill" id="my-tab-results" role="tablist">
       <li class="nav-item active">
         <a class="nav-link" id="results1-tab" data-toggle="tab" href="#results1" role="tab" aria-controls="results1" aria-selected="false">Results 1</a>
       </li>
@@ -88,7 +88,7 @@
         <a class="nav-link" id="results6-tab" data-toggle="tab" href="#results6" role="tab" aria-controls="results6" aria-selected="false">Results 6</a>
       </li>
     </ul>
-    <div class="tab-content" id="myTabContent">
+    <div class="tab-content" id="my-tab-results-content">
       <div class="tab-pane fade show active" id="results1" role="tabpanel" aria-labelledby="results1-tab">
 
         <!-- Jobs status -->
