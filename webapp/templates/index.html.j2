@@ -36,9 +36,13 @@
     <a class="navbar-brand" href="/">Twisted/Klein webapp</a>
 
     <!-- Operations -->
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto nav" role="tablist">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><i class="fas fa-running"></i> Jobs</a>
+        <a class="nav-link" data-toggle="tab" href="#my-panel-jobs"><i class="fas fa-running"></i> Jobs</a>
+      </li>
+      <!-- TODO useless - we will select this tab dynamically when clicking on a given job -->
+      <li class="nav-item active">
+        <a class="nav-link" data-toggle="tab" href="#my-panel-results"><i class="fas fa-file-alt"></i> Results</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" id="jobStart" href="#"><i class="fas fa-plus-circle"></i> New job</a>
@@ -68,29 +72,11 @@
 
   <!-- Body -->
   <div class="container-fluid" id="my-body">
-    <ul class="nav nav-tabs nav-fill" id="my-tab-results" role="tablist">
-      <li class="nav-item active">
-        <a class="nav-link" id="results1-tab" data-toggle="tab" href="#results1" role="tab" aria-controls="results1" aria-selected="false">Results 1</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="results2-tab" data-toggle="tab" href="#results2" role="tab" aria-controls="results2" aria-selected="false">Results 2</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="results3-tab" data-toggle="tab" href="#results3" role="tab" aria-controls="results3" aria-selected="false">Results 3</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="results4-tab" data-toggle="tab" href="#results4" role="tab" aria-controls="results4" aria-selected="false">Results 4</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="results5-tab" data-toggle="tab" href="#results5" role="tab" aria-controls="results5" aria-selected="false">Results 5</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="results6-tab" data-toggle="tab" href="#results6" role="tab" aria-controls="results6" aria-selected="false">Results 6</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="my-tab-results-content">
-      <div class="tab-pane fade show active" id="results1" role="tabpanel" aria-labelledby="results1-tab">
 
+    <div class="tab-content">
+
+      <!-- Tab: jobs running -->
+      <div class="tab-pane fade" role="tabpanel" id="my-panel-jobs">
         <!-- Jobs status -->
         <div class="list-group list-group-info" id="jobStatus">
           <!-- This is a template. The first one is for running jobs, the second for queued, the third for finished -->
@@ -98,14 +84,42 @@
           <a href="#" class="list-group-item list-group-item-action">JOBNAME&nbsp;<span class="badge badge-warning">queued</span></a>
           <a href="#" class="list-group-item list-group-item-action">JOBNAME&nbsp;<span class="badge badge-success">finished</span></a>
         </div>
-
       </div>
-      <div class="tab-pane fade" id="results2" role="tabpanel" aria-labelledby="results2-tab">Results 2</div>
-      <div class="tab-pane fade" id="results3" role="tabpanel" aria-labelledby="results3-tab">Results 3</div>
-      <div class="tab-pane fade" id="results4" role="tabpanel" aria-labelledby="results4-tab">Results 4</div>
-      <div class="tab-pane fade" id="results5" role="tabpanel" aria-labelledby="results5-tab">Results 5</div>
-      <div class="tab-pane fade" id="results6" role="tabpanel" aria-labelledby="results6-tab">Results 6</div>
-    </div>
+
+      <!-- Big panel with results -->
+      <div class="tab-pane fade show active" role="tabpanel" id="my-panel-results">
+        <ul class="nav nav-tabs nav-fill" id="my-tab-results" role="tablist">
+          <li class="nav-item active">
+            <a class="nav-link" id="results1-tab" data-toggle="tab" href="#results1" role="tab" aria-controls="results1" aria-selected="false">Results 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="results2-tab" data-toggle="tab" href="#results2" role="tab" aria-controls="results2" aria-selected="false">Results 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="results3-tab" data-toggle="tab" href="#results3" role="tab" aria-controls="results3" aria-selected="false">Results 3</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="results4-tab" data-toggle="tab" href="#results4" role="tab" aria-controls="results4" aria-selected="false">Results 4</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="results5-tab" data-toggle="tab" href="#results5" role="tab" aria-controls="results5" aria-selected="false">Results 5</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="results6-tab" data-toggle="tab" href="#results6" role="tab" aria-controls="results6" aria-selected="false">Results 6</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="my-tab-results-content">
+          <div class="tab-pane fade show active" id="results1" role="tabpanel" aria-labelledby="results1-tab">Results 1</div>
+          <div class="tab-pane fade" id="results2" role="tabpanel" aria-labelledby="results2-tab">Results 2</div>
+          <div class="tab-pane fade" id="results3" role="tabpanel" aria-labelledby="results3-tab">Results 3</div>
+          <div class="tab-pane fade" id="results4" role="tabpanel" aria-labelledby="results4-tab">Results 4</div>
+          <div class="tab-pane fade" id="results5" role="tabpanel" aria-labelledby="results5-tab">Results 5</div>
+          <div class="tab-pane fade" id="results6" role="tabpanel" aria-labelledby="results6-tab">Results 6</div>
+        </div>
+      </div>
+
+    </div> <!-- .tab-content -->
+
   </div>
 
 </body>
